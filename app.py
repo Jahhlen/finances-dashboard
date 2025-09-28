@@ -12,22 +12,11 @@ from monte_carlo_module import (
     plot_paths,
 )
 
-def check_password():
-    pwd = st.sidebar.text_input("Enter app password", type="password")
-    if pwd == st.secrets.get("APP_PASSWORD", ""):
-        return True
-    elif pwd:
-        st.sidebar.error("Wrong password")
-    return False
-
 @st.cache_data(show_spinner=False, ttl=60*60)
 def cached_monthly_returns(assets, years):
     return get_monthly_returns(assets, years=years)
 
 st.set_page_config(page_title="Monte Carlo Portfolio Simulator", layout="wide")
-
-if "APP_PASSWORD" in st.secrets and not check_password():
-    st.stop()
 
 st.title("📊 Monte Carlo Portfolio Simulator")
 
